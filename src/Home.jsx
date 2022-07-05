@@ -91,10 +91,7 @@ const Home = () => {
       </form>
 
       <div>
-        <Expenses
-          removePost={() => handleRemovePost(post)}
-          editPost={() => handleEditPost(post)}
-        />
+        <Expenses />
       </div>
     </div>
   );

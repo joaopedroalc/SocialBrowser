@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { PostsContext } from "../contexts/PostsContext";
 
-export default function Expenses({ removePost, editPost }) {
+export default function Expenses() {
   const {
     user,
     post,
