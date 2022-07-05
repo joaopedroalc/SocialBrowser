@@ -1,18 +1,21 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { PostsContext } from "./contexts/PostsContext";
 import { logout } from "./firebase";
 import Expenses from "./routes/expenses";
 
-const Home = ({
-  user,
-  post,
-  setPost,
-  nome,
-  setNome,
-  email,
-  setEmail,
-  content,
-  setContent,
-}) => {
+const Home = () => {
+  const {
+    user,
+    post,
+    setPost,
+    nome,
+    setNome,
+    email,
+    setEmail,
+    content,
+    setContent,
+  } = useContext(PostsContext);
+
   function addPost() {
     event.preventDefault();
     setContent([...content, [post, nome, email]]);
@@ -88,27 +91,10 @@ const Home = ({
       </form>
 
       <div>
-        {content.map((post) => {
-          return (
-            <>
-              <Expenses
-                postState={post}
-                setPostState={setPost}
-                nomeState={nome}
-                setNomeState={setNome}
-                emailState={email}
-                setEmailState={setEmail}
-                contentState={content}
-                setContent={setContent}
-                text={post[0]}
-                nome={post[1]}
-                email={post[2]}
-                removePost={() => handleRemovePost(post)}
-                editPost={() => handleEditPost(post)}
-              />
-            </>
-          );
-        })}
+        <Expenses
+          removePost={() => handleRemovePost(post)}
+          editPost={() => handleEditPost(post)}
+        />
       </div>
     </div>
   );
