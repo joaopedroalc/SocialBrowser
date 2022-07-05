@@ -36,30 +36,6 @@ const Home = () => {
     setEmail(event.target.value);
   }
 
-  function handleRemovePost(postRemovido) {
-    const arrayDpsDaRemocao = content.filter((postExistente) => {
-      return postExistente !== postRemovido;
-    });
-
-    setContent(arrayDpsDaRemocao);
-  }
-
-  function handleEditPost(postEdit) {
-    const arrayDpsDaRemocao = content.filter((postExistente) => {
-      return postExistente !== postEdit;
-    });
-    const valorText = prompt("Digite um novo texto para este post");
-    const valorName = prompt("Digite um novo nome para este post");
-    const valorEmail = prompt("Digite um novo email para este post");
-
-    setContent([[valorText, valorName, valorEmail], ...arrayDpsDaRemocao]);
-    // [...content, [post,nome]]
-
-    setPost("");
-    setNome("");
-    setEmail("");
-  }
-
   return (
     <div className='home'>
       <h1>Hello, {user.displayName}</h1>
