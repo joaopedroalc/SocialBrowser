@@ -3,7 +3,6 @@ import "./App.css";
 import { signInWithGoogle } from "./firebase";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import Home from "./Home";
-import { Link } from "react-router-dom";
 import { PostsContext } from "./contexts/PostsContext";
 
 const auth = getAuth();
@@ -13,7 +12,7 @@ function App() {
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
 
-  const [content, setContent] = useState([post, nome]);
+  const [content, setContent] = useState([]);
 
   const [user, setUser] = useState(null);
 
@@ -42,14 +41,7 @@ function App() {
         }}
       >
         {user ? (
-          <>
-            <header>
-              <nav>
-                <Link to='/expenses'>Expenses</Link>
-              </nav>
-            </header>
-            <Home />
-          </>
+          <Home />
         ) : (
           <button onClick={signInWithGoogle}>Logar com google</button>
         )}
