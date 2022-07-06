@@ -84,7 +84,7 @@ const Home = () => {
       }
       return postExistente;
     });
-    setContent(dados);
+    saveData(dados);
   }
 
   function handleCaptureValuePost() {
