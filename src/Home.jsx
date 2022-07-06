@@ -12,6 +12,8 @@ const Home = () => {
     setNome,
     email,
     setEmail,
+    isCompleted,
+    setIsCompleted,
     content,
     setContent,
   } = useContext(PostsContext);
@@ -34,10 +36,15 @@ const Home = () => {
 
   function addPost() {
     event.preventDefault();
-    saveData([...content, { post: post, nome: nome, email: email }]);
+    saveData([
+      ...content,
+      { post: post, nome: nome, email: email, isCompleted: isCompleted },
+    ]);
+    console.log(content);
     setPost("");
     setNome("");
     setEmail("");
+    setIsCompleted(false);
   }
 
   function deletarPost(post) {
@@ -65,6 +72,19 @@ const Home = () => {
     setPost("");
     setNome("");
     setEmail("");
+  }
+
+  function checkedPost(post) {
+    const dados = content.map((postExistente) => {
+      if (postExistente.post === post) {
+        return {
+          ...postExistente,
+          isCompleted: !postExistente.isCompleted,
+        };
+      }
+      return postExistente;
+    });
+    setContent(dados);
   }
 
   function handleCaptureValuePost() {
@@ -110,7 +130,11 @@ const Home = () => {
       </form>
 
       <div>
-        <Post deletarPost={deletarPost} editarPost={editarPost} />
+        <Post
+          deletarPost={deletarPost}
+          editarPost={editarPost}
+          checkedPost={checkedPost}
+        />
       </div>
     </div>
   );
