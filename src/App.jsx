@@ -10,7 +10,6 @@ const auth = getAuth();
 function App() {
   const [post, setPost] = useState("");
   const [nome, setNome] = useState("");
-  const [email, setEmail] = useState("");
   const [isCompleted, setIsCompleted] = useState(false);
 
   const [content, setContent] = useState([]);
@@ -33,8 +32,6 @@ function App() {
           setPost,
           nome,
           setNome,
-          email,
-          setEmail,
           isCompleted,
           setIsCompleted,
           content,

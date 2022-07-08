@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Post from "./components/Post";
 import { PostsContext } from "./contexts/PostsContext";
 import { logout } from "./firebase";
@@ -10,8 +10,6 @@ const Home = () => {
     setPost,
     nome,
     setNome,
-    email,
-    setEmail,
     isCompleted,
     setIsCompleted,
     content,
@@ -38,12 +36,11 @@ const Home = () => {
     event.preventDefault();
     saveData([
       ...content,
-      { post: post, nome: nome, email: email, isCompleted: isCompleted },
+      { post: post, nome: nome, email: user.email, isCompleted: isCompleted },
     ]);
     console.log(content);
     setPost("");
     setNome("");
-    setEmail("");
     setIsCompleted(false);
   }
 
@@ -62,16 +59,14 @@ const Home = () => {
     });
     const valorText = prompt("Digite um novo texto para este post");
     const valorName = prompt("Digite um novo nome para este post");
-    const valorEmail = prompt("Digite um novo email para este post");
 
     saveData([
-      { post: valorText, nome: valorName, email: valorEmail },
+      { post: valorText, nome: valorName, email: user.email },
       ...arrayDpsDaRemocao,
     ]);
 
     setPost("");
     setNome("");
-    setEmail("");
   }
 
   function checkedPost(post) {
@@ -95,10 +90,6 @@ const Home = () => {
     setNome(event.target.value);
   }
 
-  function handleCaptureValueEmail() {
-    setEmail(event.target.value);
-  }
-
   return (
     <div className='home'>
       <h1>Hello, {user.displayName}</h1>
@@ -112,19 +103,21 @@ const Home = () => {
           type='text'
           onChange={handleCaptureValuePost}
           placeholder='Insira um post'
+          required
           value={post}
         />
         <input
           type='text'
           onChange={handleCaptureValueName}
           placeholder='Nome'
+          required
           value={nome}
         />
         <input
           type='email'
-          onChange={handleCaptureValueEmail}
           placeholder='Email'
-          value={email}
+          style={{ display: "none" }}
+          value={user.email}
         />
         <button type='submit'>Postar</button>
       </form>
