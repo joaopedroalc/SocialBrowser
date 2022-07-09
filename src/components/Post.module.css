@@ -1,0 +1,13 @@
+.checked {
+  text-decoration: line-through;
+}
+
+.unchecked {
+  text-decoration: none;
+}
+.posts {
+  display: flex;
+  justify-content: center;
+  width: 60vw;
+  flex-direction: column;
+}

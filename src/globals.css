@@ -1,0 +1,10 @@
+:root {
+  --gray-500: #666666;
+  --gray-700: #8c8c8c;
+  --green-300: #76ee94;
+  --green-500: #018031;
+  --green-700: #009846;
+}
+body {
+  font-family: "Roboto", sans-serif;
+}

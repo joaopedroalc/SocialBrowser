@@ -1,0 +1,86 @@
+.home {
+  background-color: #787878;
+  color: #fff;
+  width: 100%;
+  height: 100%;
+}
+.header {
+  width: 100%;
+  height: 5rem;
+  font-family: "Allura", cursive;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.colTwo {
+  display: flex;
+  justify-content: center;
+  gap: 0rem;
+  background-color: #087938;
+  height: 100%;
+}
+.ImgMain {
+  width: 40vw;
+  height: 100%;
+  object-fit: cover;
+}
+.infos {
+  width: 100%;
+}
+.infos h2 {
+  padding-top: 1rem;
+  font-family: "Lobster", cursive;
+  font-size: 2rem;
+  margin: 0.5rem 0 2rem 2.5rem;
+  text-shadow: 0.2em 0.5em 0.1em #000, -0.3em 0.1em 0.1em #060,
+    0.4em -0.3em 0.1em #006;
+}
+.infos span {
+  padding-top: 1rem;
+  font-family: "Lobster", cursive;
+  display: block;
+  font-size: 2rem;
+  max-width: 72%;
+  margin-left: 3.5rem;
+  text-shadow: 0 0 0.2em #87f, 0 0 0.2em #87f, 0 0 0.2em #87f;
+}
+
+.infos p {
+  max-width: 60%;
+  line-height: 1.5;
+  font-size: 1rem;
+  text-align: justify;
+}
+.backgroundPhone {
+  background-color: #000;
+  color: #fff;
+  padding: 1rem 0;
+}
+
+.divPhone {
+  display: flex;
+  justify-content: center;
+  margin: 2rem;
+}
+
+.textPhone {
+  width: 100%;
+  margin-left: 1rem;
+  margin-top: 2rem;
+}
+
+.textPhone p {
+  font-size: 1.1rem;
+}
+
+footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+footer p {
+  margin-top: 1rem;
+  color: #000;
+}

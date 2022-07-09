@@ -1,11 +1,16 @@
 import React, { useContext, useEffect, useState } from "react";
-import Post from "./components/Post";
-import { PostsContext } from "./contexts/PostsContext";
-import { logout } from "./firebase";
+import Post from "./Post";
+import { PostsContext } from "../contexts/PostsContext";
+import { logout } from "../firebase";
 import { getDatabase, ref, set, get, child } from "firebase/database";
+import { v4 as uuidv4 } from "uuid";
+import styles from "./PageToUsers.module.css";
+import { Button } from "@mui/material";
 
-const Home = () => {
+const PageToUsers = () => {
   const {
+    id,
+    setId,
     user,
     post,
     setPost,
@@ -22,7 +27,7 @@ const Home = () => {
     get(child(dbRef, `posts/`))
       .then((snapshot) => {
         if (snapshot.exists()) {
-          console.log(snapshot.val());
+          // console.log(snapshot.val());
           setContent(snapshot.val());
         } else {
           console.log("No data available");
@@ -38,15 +43,28 @@ const Home = () => {
     event.preventDefault();
     setContent([
       ...content,
-      { post: post, nome: nome, email: user.email, isCompleted: isCompleted },
+      {
+        id: id,
+        post: post,
+        nome: nome,
+        email: user.email,
+        isCompleted: isCompleted,
+      },
     ]);
 
     const db = getDatabase();
     set(ref(db, "posts/"), [
       ...content,
-      { post: post, nome: nome, email: user.email, isCompleted: isCompleted },
+      {
+        id: id,
+        post: post,
+        nome: nome,
+        email: user.email,
+        isCompleted: isCompleted,
+      },
     ]);
 
+    setId(uuidv4());
     setPost("");
     setNome("");
     setIsCompleted(false);
@@ -74,16 +92,17 @@ const Home = () => {
     const valorName = prompt("Digite um novo nome para este post");
 
     setContent([
-      { post: valorText, nome: valorName, email: user.email },
+      { id: id, post: valorText, nome: valorName, email: user.email },
       ...arrayDpsDaRemocao,
     ]);
 
     const db = getDatabase();
     set(ref(db, "posts/"), [
-      { post: valorText, nome: valorName, email: user.email },
+      { id: id, post: valorText, nome: valorName, email: user.email },
       ...arrayDpsDaRemocao,
     ]);
 
+    setId(uuidv4());
     setPost("");
     setNome("");
   }
@@ -110,46 +129,60 @@ const Home = () => {
   }
 
   return (
-    <div className='home'>
-      <h1>Hello, {user.displayName}</h1>
-      <img src={user.photoURL} referrerPolicy='no-referrer' />
-      <button className='button signout' onClick={logout}>
-        Sign out
-      </button>
+    <div className={styles.page}>
+      <header className={styles.header}>
+        <h1>Oi, {user.displayName}</h1>
+        <div className={styles.userInfo}>
+          <img src={user.photoURL} referrerPolicy='no-referrer' />
+          <Button
+            variant='contained'
+            color='error'
+            fontSize='small'
+            onClick={logout}
+          >
+            Logout
+          </Button>
+        </div>
+      </header>
 
-      <form method='post' onSubmit={addPost} style={{ marginTop: "2rem" }}>
-        <textarea
-          type='text'
-          onChange={handleCaptureValuePost}
-          placeholder='Insira um post'
-          required
-          value={post}
-        />
-        <input
-          type='text'
-          onChange={handleCaptureValueName}
-          placeholder='Nome'
-          required
-          value={nome}
-        />
-        <input
-          type='email'
-          placeholder='Email'
-          style={{ display: "none" }}
-          value={user.email}
-        />
-        <button type='submit'>Postar</button>
-      </form>
+      <main>
+        <form method='post' onSubmit={addPost} className={styles.form}>
+          <input
+            type='text'
+            onChange={handleCaptureValueName}
+            placeholder='Nome'
+            required
+            value={nome}
+          />
+          <textarea
+            type='text'
+            onChange={handleCaptureValuePost}
+            placeholder='Insira um post'
+            required
+            value={post}
+          />
 
-      <div>
-        <Post
-          deletarPost={deletarPost}
-          editarPost={editarPost}
-          checkedPost={checkedPost}
-        />
-      </div>
+          <input
+            type='email'
+            placeholder='Email'
+            style={{ display: "none" }}
+            defaultValue={user.email}
+          />
+          <Button variant='contained' color='success' type='submit'>
+            Postar
+          </Button>
+        </form>
+
+        <div>
+          <Post
+            deletarPost={deletarPost}
+            editarPost={editarPost}
+            checkedPost={checkedPost}
+          />
+        </div>
+      </main>
     </div>
   );
 };
 
-export default Home;
+export default PageToUsers;

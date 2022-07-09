@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
-import "./App.css";
-import { signInWithGoogle } from "./firebase";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import Home from "./Home";
+import PageToUsers from "./components/PageToUsers";
 import { PostsContext } from "./contexts/PostsContext";
+import { Home } from "./components/Home";
+import { v4 as uuidv4 } from "uuid";
+import "./reset.css";
+import "./globals.css";
 
 const auth = getAuth();
 
@@ -11,6 +13,7 @@ function App() {
   const [post, setPost] = useState("");
   const [nome, setNome] = useState("");
   const [isCompleted, setIsCompleted] = useState(false);
+  const [id, setId] = useState(uuidv4());
 
   const [content, setContent] = useState([]);
 
@@ -28,6 +31,8 @@ function App() {
     <div className='App'>
       <PostsContext.Provider
         value={{
+          id,
+          setId,
           post,
           setPost,
           nome,
@@ -40,11 +45,7 @@ function App() {
           setUser,
         }}
       >
-        {user ? (
-          <Home />
-        ) : (
-          <button onClick={signInWithGoogle}>Logar com google</button>
-        )}
+        {user ? <PageToUsers /> : <Home />}
       </PostsContext.Provider>
     </div>
   );
