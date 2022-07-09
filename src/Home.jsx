@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import Post from "./components/Post";
 import { PostsContext } from "./contexts/PostsContext";
 import { logout } from "./firebase";
+import { getDatabase, ref, set, get, child } from "firebase/database";
 
 const Home = () => {
   const {
@@ -16,29 +17,36 @@ const Home = () => {
     setContent,
   } = useContext(PostsContext);
 
-  function loadData() {
-    const saved = localStorage.getItem("content");
-    if (saved) {
-      setContent(JSON.parse(saved));
-    }
-  }
-
   useEffect(() => {
-    loadData();
+    const dbRef = ref(getDatabase());
+    get(child(dbRef, `posts/`))
+      .then((snapshot) => {
+        if (snapshot.exists()) {
+          console.log(snapshot.val());
+          setContent(snapshot.val());
+        } else {
+          console.log("No data available");
+          setContent([{}]);
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }, []);
-
-  function saveData(data) {
-    setContent(data);
-    localStorage.setItem("content", JSON.stringify(data));
-  }
 
   function addPost() {
     event.preventDefault();
-    saveData([
+    setContent([
       ...content,
       { post: post, nome: nome, email: user.email, isCompleted: isCompleted },
     ]);
-    console.log(content);
+
+    const db = getDatabase();
+    set(ref(db, "posts/"), [
+      ...content,
+      { post: post, nome: nome, email: user.email, isCompleted: isCompleted },
+    ]);
+
     setPost("");
     setNome("");
     setIsCompleted(false);
@@ -49,7 +57,12 @@ const Home = () => {
       return postExistente !== post;
     });
 
-    saveData(arrayDpsDaRemocao);
+    console.log(arrayDpsDaRemocao);
+
+    const db = getDatabase();
+    set(ref(db, "posts/"), arrayDpsDaRemocao);
+
+    setContent(arrayDpsDaRemocao);
   }
 
   function editarPost(post) {
@@ -60,7 +73,13 @@ const Home = () => {
     const valorText = prompt("Digite um novo texto para este post");
     const valorName = prompt("Digite um novo nome para este post");
 
-    saveData([
+    setContent([
+      { post: valorText, nome: valorName, email: user.email },
+      ...arrayDpsDaRemocao,
+    ]);
+
+    const db = getDatabase();
+    set(ref(db, "posts/"), [
       { post: valorText, nome: valorName, email: user.email },
       ...arrayDpsDaRemocao,
     ]);
@@ -79,7 +98,7 @@ const Home = () => {
       }
       return postExistente;
     });
-    saveData(dados);
+    setContent(dados);
   }
 
   function handleCaptureValuePost() {
