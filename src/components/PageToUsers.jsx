@@ -16,8 +16,7 @@ const PageToUsers = () => {
     setPost,
     nome,
     setNome,
-    isCompleted,
-    setIsCompleted,
+    like,
     content,
     setContent,
   } = useContext(PostsContext);
@@ -48,7 +47,7 @@ const PageToUsers = () => {
         post: post,
         nome: nome,
         email: user.email,
-        isCompleted: isCompleted,
+        like: like,
       },
     ]);
 
@@ -60,14 +59,13 @@ const PageToUsers = () => {
         post: post,
         nome: nome,
         email: user.email,
-        isCompleted: isCompleted,
+        like: like,
       },
     ]);
 
     setId(uuidv4());
     setPost("");
     setNome("");
-    setIsCompleted(false);
   }
 
   function deletarPost(post) {
@@ -88,8 +86,8 @@ const PageToUsers = () => {
       console.log(postExistente);
       return postExistente !== post;
     });
-    const valorText = prompt("Digite um novo texto para este post");
     const valorName = prompt("Digite um novo nome para este post");
+    const valorText = prompt("Digite um novo texto para este post");
 
     setContent([
       { id: id, post: valorText, nome: valorName, email: user.email },
@@ -105,19 +103,6 @@ const PageToUsers = () => {
     setId(uuidv4());
     setPost("");
     setNome("");
-  }
-
-  function checkedPost(post) {
-    const dados = content.map((postExistente) => {
-      if (postExistente.post === post) {
-        return {
-          ...postExistente,
-          isCompleted: !postExistente.isCompleted,
-        };
-      }
-      return postExistente;
-    });
-    setContent(dados);
   }
 
   function handleCaptureValuePost() {
@@ -174,11 +159,7 @@ const PageToUsers = () => {
         </form>
 
         <div>
-          <Post
-            deletarPost={deletarPost}
-            editarPost={editarPost}
-            checkedPost={checkedPost}
-          />
+          <Post deletarPost={deletarPost} editarPost={editarPost} />
         </div>
       </main>
     </div>

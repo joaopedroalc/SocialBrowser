@@ -38,6 +38,7 @@ main {
   margin-top: 2rem;
   margin-left: 2rem;
   width: 30vw;
+  height: 200px;
   background-color: var(--green-300);
   flex-direction: column;
   border-radius: 5px;

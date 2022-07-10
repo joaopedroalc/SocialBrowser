@@ -5,6 +5,12 @@
   --green-500: #018031;
   --green-700: #009846;
 }
+
+html,
+body {
+  background-color: #000;
+}
+
 body {
   font-family: "Roboto", sans-serif;
 }

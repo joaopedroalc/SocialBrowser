@@ -1,19 +1,27 @@
 import { Button } from "@mui/material";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { PostsContext } from "../contexts/PostsContext";
 import styles from "./Post.module.css";
+import ThumbUpIcon from "@mui/icons-material/ThumbUp";
+import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 
-export default function Post({ deletarPost, editarPost, checkedPost }) {
-  const { user, content } = useContext(PostsContext);
+export default function Post({ deletarPost, editarPost }) {
+  const { user, content, like, setLike } = useContext(PostsContext);
+
+  function curtirPost() {
+    setLike(1);
+  }
+
+  function descurtirPost() {
+    setLike(0);
+  }
 
   return (
     <div className={styles.posts}>
       {content.map((item) => (
         <div key={item.id}>
           <h2>Nome - {item.nome}</h2>
-          <p className={item.isCompleted ? styles.checked : styles.unchecked}>
-            Post:{item.post}
-          </p>
+          <p>Post:{item.post}</p>
           <h3 style={{ display: "none", visibility: "hidden" }}>
             {item.email}
           </h3>
@@ -33,10 +41,16 @@ export default function Post({ deletarPost, editarPost, checkedPost }) {
               >
                 Editar
               </Button>
-              <button onClick={() => checkedPost(item.post)}>Marcar</button>
             </>
           ) : (
-            ""
+            <>
+              {like === 0 ? (
+                <ThumbDownIcon onClick={() => curtirPost()} />
+              ) : (
+                <ThumbUpIcon onClick={() => descurtirPost()} />
+              )}
+              <p>{like}</p>
+            </>
           )}
         </div>
       ))}
