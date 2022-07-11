@@ -12,7 +12,7 @@ const auth = getAuth();
 function App() {
   const [post, setPost] = useState("");
   const [nome, setNome] = useState("");
-  const [like, setLike] = useState(0);
+  const [like, setLike] = useState(false);
   const [id, setId] = useState(uuidv4());
 
   const [content, setContent] = useState([]);

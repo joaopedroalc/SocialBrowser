@@ -105,6 +105,24 @@ const PageToUsers = () => {
     setNome("");
   }
 
+  function curtirPost(post) {
+    const dados = content.map((postExistente) => {
+      if (postExistente.post === post) {
+        // console.log({
+        //   ...postExistente,
+        //   like: !postExistente.like,
+        // });
+        return {
+          ...postExistente,
+          like: !postExistente.like,
+        };
+      }
+      return postExistente;
+    });
+    console.log(dados);
+    setContent(dados);
+  }
+
   function handleCaptureValuePost() {
     setPost(event.target.value);
   }
@@ -159,7 +177,11 @@ const PageToUsers = () => {
         </form>
 
         <div>
-          <Post deletarPost={deletarPost} editarPost={editarPost} />
+          <Post
+            deletarPost={deletarPost}
+            editarPost={editarPost}
+            curtirPost={curtirPost}
+          />
         </div>
       </main>
     </div>

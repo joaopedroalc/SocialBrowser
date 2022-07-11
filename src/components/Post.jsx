@@ -1,20 +1,12 @@
 import { Button } from "@mui/material";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { PostsContext } from "../contexts/PostsContext";
 import styles from "./Post.module.css";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 
-export default function Post({ deletarPost, editarPost }) {
-  const { user, content, like, setLike } = useContext(PostsContext);
-
-  function curtirPost() {
-    setLike(1);
-  }
-
-  function descurtirPost() {
-    setLike(0);
-  }
+export default function Post({ deletarPost, editarPost, curtirPost }) {
+  const { user, content } = useContext(PostsContext);
 
   return (
     <div className={styles.posts}>
@@ -44,12 +36,12 @@ export default function Post({ deletarPost, editarPost }) {
             </>
           ) : (
             <>
-              {like === 0 ? (
-                <ThumbDownIcon onClick={() => curtirPost()} />
+              {item.like ? (
+                <ThumbUpIcon onClick={() => curtirPost(item.post)} />
               ) : (
-                <ThumbUpIcon onClick={() => descurtirPost()} />
+                <ThumbDownIcon onClick={() => curtirPost(item.post)} />
               )}
-              <p>{like}</p>
+              <p>{item.like ? "1" : "0"}</p>
             </>
           )}
         </div>
