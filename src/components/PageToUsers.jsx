@@ -6,6 +6,7 @@ import { getDatabase, ref, set, get, child } from "firebase/database";
 import { v4 as uuidv4 } from "uuid";
 import styles from "./PageToUsers.module.css";
 import { Button } from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
 
 const PageToUsers = () => {
   const {
@@ -20,6 +21,8 @@ const PageToUsers = () => {
     content,
     setContent,
   } = useContext(PostsContext);
+
+  const [openForm, setOpenForm] = useState(false);
 
   useEffect(() => {
     const dbRef = ref(getDatabase());
@@ -131,6 +134,14 @@ const PageToUsers = () => {
     setNome(event.target.value);
   }
 
+  function cadastrarPost() {
+    setOpenForm(true);
+  }
+
+  function cancelarCadastrarPost() {
+    setOpenForm(false);
+  }
+
   return (
     <div className={styles.page}>
       <header className={styles.header}>
@@ -149,32 +160,42 @@ const PageToUsers = () => {
       </header>
 
       <main>
-        <form method='post' onSubmit={addPost} className={styles.form}>
-          <input
-            type='text'
-            onChange={handleCaptureValueName}
-            placeholder='Nome'
-            required
-            value={nome}
-          />
-          <textarea
-            type='text'
-            onChange={handleCaptureValuePost}
-            placeholder='Insira um post'
-            required
-            value={post}
-          />
+        {openForm ? (
+          <form method='post' onSubmit={addPost} className={styles.form}>
+            <CloseIcon
+              className={styles.closeIcon}
+              onClick={cancelarCadastrarPost}
+            />
+            <input
+              type='text'
+              onChange={handleCaptureValueName}
+              placeholder='Nome'
+              required
+              value={nome}
+            />
+            <textarea
+              type='text'
+              onChange={handleCaptureValuePost}
+              placeholder='Insira um post'
+              required
+              value={post}
+            />
 
-          <input
-            type='email'
-            placeholder='Email'
-            style={{ display: "none" }}
-            defaultValue={user.email}
-          />
-          <Button variant='contained' color='success' type='submit'>
-            Postar
+            <input
+              type='email'
+              placeholder='Email'
+              style={{ display: "none" }}
+              defaultValue={user.email}
+            />
+            <Button variant='contained' color='success' type='submit'>
+              Postar
+            </Button>
+          </form>
+        ) : (
+          <Button color='success' variant='contained' onClick={cadastrarPost}>
+            Cadastrar post
           </Button>
-        </form>
+        )}
 
         <div>
           <Post
