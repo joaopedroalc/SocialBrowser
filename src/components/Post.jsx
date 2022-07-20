@@ -12,7 +12,7 @@ export default function Post({ deletarPost, editarPost, curtirPost }) {
     <div className={styles.posts}>
       {content.map(
         (item) =>
-          item !== undefined && (
+          item.id !== undefined && (
             <div key={item.id}>
               <h2>Nome - {item.nome}</h2>
 
