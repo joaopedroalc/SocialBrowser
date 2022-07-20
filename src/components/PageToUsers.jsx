@@ -76,7 +76,6 @@ const PageToUsers = () => {
     setPost("");
     setNome("");
     setImage("");
-    setImageURL("");
   }
 
   function deletarPost(post) {
@@ -104,13 +103,25 @@ const PageToUsers = () => {
 
     if (valorName !== null && valorText !== null) {
       setContent([
-        { id: id, post: valorText, nome: valorName, email: user.email },
+        {
+          id: id,
+          post: valorText,
+          imagem: imageURL,
+          nome: valorName,
+          email: user.email,
+        },
         ...arrayDpsDaRemocao,
       ]);
 
       const db = getDatabase();
       set(ref(db, "posts/"), [
-        { id: id, post: valorText, nome: valorName, email: user.email },
+        {
+          id: id,
+          post: valorText,
+          imagem: imageURL,
+          nome: valorName,
+          email: user.email,
+        },
         ...arrayDpsDaRemocao,
       ]);
 
