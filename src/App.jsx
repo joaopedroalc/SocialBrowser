@@ -10,9 +10,11 @@ import "./globals.css";
 const auth = getAuth();
 
 function App() {
-  const [post, setPost] = useState("");
   const [nome, setNome] = useState("");
-  const [like, setLike] = useState(0);
+  const [image, setImage] = useState("");
+  const [imageURL, setImageURL] = useState("");
+  const [post, setPost] = useState("");
+  const [like, setLike] = useState(false);
   const [id, setId] = useState(uuidv4());
 
   const [content, setContent] = useState([]);
@@ -37,6 +39,10 @@ function App() {
           setPost,
           nome,
           setNome,
+          image,
+          setImage,
+          imageURL,
+          setImageURL,
           like,
           setLike,
           content,

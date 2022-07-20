@@ -35,14 +35,25 @@ main {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  margin-top: 2rem;
   margin-left: 2rem;
   width: 30vw;
-  height: 200px;
+  height: 100%;
   background-color: var(--green-300);
   flex-direction: column;
   border-radius: 5px;
   padding: 0.5rem;
+  position: relative;
+}
+
+.headerForm {
+  height: 2.5rem;
+}
+
+.closeIcon {
+  position: absolute;
+  top: 5%;
+  right: 5%;
+  cursor: pointer;
 }
 
 .form input {
