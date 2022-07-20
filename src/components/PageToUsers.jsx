@@ -76,6 +76,7 @@ const PageToUsers = () => {
     setPost("");
     setNome("");
     setImage("");
+    setImageURL("");
   }
 
   function deletarPost(post) {
@@ -106,7 +107,7 @@ const PageToUsers = () => {
         {
           id: id,
           post: valorText,
-          imagem: imageURL,
+          imagem: post.imagem,
           nome: valorName,
           email: user.email,
         },
@@ -118,7 +119,7 @@ const PageToUsers = () => {
         {
           id: id,
           post: valorText,
-          imagem: imageURL,
+          imagem: post.imagem,
           nome: valorName,
           email: user.email,
         },
