@@ -33,14 +33,14 @@ export function Home() {
                 <img src={Phone} alt='Phone' />
                 <div className={styles.textPhone}>
                   <p>
-                    Não perca tempo adicionando amigos , aqui você publica sua
-                    ideia e seu estilo de vida sem limitações.
+                    Não perca mais tempo adicionando amigos , aqui você publica
+                    sua ideia e seu estilo de vida sem limitações.
                   </p>
                   <br />
                   <p>
-                    A única regra é que os posts que mais tiverem ficarão no top
-                    ranking e são ordenados sempre dos mais recentes para os
-                    mais antigos
+                    A única regra é que os posts que mais tiverem likes ficarão
+                    no top ranking e são ordenados sempre dos mais recentes para
+                    os mais antigos.
                   </p>
                 </div>
               </div>
