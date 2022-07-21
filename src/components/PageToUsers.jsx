@@ -72,6 +72,8 @@ const PageToUsers = () => {
       },
     ]);
 
+    setOpenForm(false);
+
     setId(uuidv4());
     setPost("");
     setNome("");
@@ -192,7 +194,12 @@ const PageToUsers = () => {
   }
 
   return (
-    <div className={styles.page}>
+    <div
+      className={styles.page}
+      style={
+        openForm ? { backgroundColor: "#ccc" } : { backgroundColor: "#000" }
+      }
+    >
       <header className={styles.header}>
         <h1>Oi, {user.displayName}</h1>
         <div className={styles.userInfo}>
@@ -208,7 +215,7 @@ const PageToUsers = () => {
         </div>
       </header>
 
-      <main>
+      <main className={styles.main}>
         {openForm ? (
           <form method='post' onSubmit={addPost} className={styles.form}>
             <div className={styles.headerForm}>
@@ -230,12 +237,12 @@ const PageToUsers = () => {
               onChange={handleCaptureValueImage}
             />
             {image ? (
-              <img src={imageURL} width='50%' height='100%' />
+              <img src={imageURL} width='50%' height='45%' />
             ) : (
               <img
                 src='https://forum.bubble.io/uploads/default/original/3X/1/2/12e944afd917d123319c9074a7e72581785a3b38.png'
                 width='50%'
-                height='100%'
+                height='45%'
               />
             )}
             <textarea
@@ -259,7 +266,7 @@ const PageToUsers = () => {
         ) : (
           <Button
             color='success'
-            style={{ width: "200px", height: "100%" }}
+            style={{ width: "200px", height: "100%", marginTop: "2rem" }}
             variant='contained'
             onClick={cadastrarPost}
           >
@@ -267,7 +274,8 @@ const PageToUsers = () => {
           </Button>
         )}
 
-        <div>
+        <div className={styles.groupPosts}>
+          <h2>Publicações</h2>
           <Post
             deletarPost={deletarPost}
             editarPost={editarPost}
