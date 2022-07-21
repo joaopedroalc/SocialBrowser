@@ -57,6 +57,8 @@ main {
 }
 
 .headerForm {
+  display: block;
+  width: 90vw;
   height: 2.5rem;
 }
 

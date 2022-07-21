@@ -58,7 +58,7 @@ h6 {
 }
 
 .post button {
-  width: 20%;
+  width: max-content;
   align-self: center;
 }
 
@@ -67,4 +67,11 @@ h6 {
   align-items: center;
   justify-content: center;
   gap: 5px;
+}
+
+@media (max-width: 768px) {
+  .posts {
+    width: 100%;
+    flex-direction: column-reverse;
+  }
 }
