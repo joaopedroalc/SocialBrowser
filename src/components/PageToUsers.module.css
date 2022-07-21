@@ -120,10 +120,6 @@ main {
     overflow: auto; /* Enable scroll if needed */
   }
 
-  .headerForm {
-    height: 0;
-  }
-
   .form img {
     width: 90%;
   }
