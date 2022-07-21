@@ -48,6 +48,8 @@ h6 {
   font-size: 2rem;
   margin-bottom: 0px;
   color: #000 !important;
+  word-break: break-all;
+  max-width: 300px;
 }
 
 .content {
