@@ -43,7 +43,7 @@ const signInWithGoogle = async () => {
         email: user.email,
       });
     }
-    console.log(user)
+    // console.log(user)
   } catch (err) {
     console.error(err);
     alert(err.message);

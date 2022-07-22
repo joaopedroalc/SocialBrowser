@@ -2,7 +2,6 @@ import { Image } from "antd";
 import "antd/dist/antd.css"; // se der erro remove esse css
 
 export function Images({ img }) {
-  console.log(img);
   return (
     <Image.PreviewGroup>
       <Image

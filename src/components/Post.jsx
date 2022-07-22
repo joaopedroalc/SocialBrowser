@@ -8,7 +8,6 @@ import { Images } from "./Images";
 
 export default function Post({ deletarPost, editarPost, curtirPost }) {
   const { user, content } = useContext(PostsContext);
-  console.log(content);
 
   return (
     <div className={styles.posts}>

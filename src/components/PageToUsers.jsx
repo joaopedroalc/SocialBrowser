@@ -33,7 +33,7 @@ const PageToUsers = () => {
     get(child(dbRef, `posts/`))
       .then((snapshot) => {
         if (snapshot.exists()) {
-          console.log(snapshot.val());
+          // console.log(snapshot.val());
           setContent(snapshot.val());
         } else {
           console.log("No data available");
@@ -86,8 +86,6 @@ const PageToUsers = () => {
       return postExistente !== post;
     });
 
-    console.log(arrayDpsDaRemocao);
-
     const db = getDatabase();
     set(ref(db, "posts/"), arrayDpsDaRemocao);
 
@@ -96,15 +94,15 @@ const PageToUsers = () => {
 
   function editarPost(post) {
     const arrayDpsDaRemocao = content.filter((postExistente) => {
-      console.log(postExistente);
       return postExistente !== post;
     });
+
     const valorText = prompt("Digite um novo texto para este post");
 
     if (valorText !== null) {
       setContent([
         {
-          id: id,
+          id: post.id,
           post: valorText,
           imagem: post.imagem,
           nome: post.nome,
@@ -116,7 +114,7 @@ const PageToUsers = () => {
       const db = getDatabase();
       set(ref(db, "posts/"), [
         {
-          id: id,
+          id: post.id,
           post: valorText,
           imagem: post.imagem,
           nome: post.nome,
@@ -147,7 +145,7 @@ const PageToUsers = () => {
       }
       return postExistente;
     });
-    console.log(dados);
+
     setContent(dados);
   }
 
@@ -182,10 +180,10 @@ const PageToUsers = () => {
 
   async function handleCaptureValueImage(e) {
     setImage(e.target.files[0]);
-    console.log(e.target.files[0]);
+    // console.log(e.target.files[0]);
 
     const base64 = await convertToBase64(e.target.files[0]);
-    console.log(base64);
+    // console.log(base64);
 
     setImageURL(base64);
   }
