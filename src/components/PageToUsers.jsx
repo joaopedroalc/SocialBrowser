@@ -99,18 +99,15 @@ const PageToUsers = () => {
       console.log(postExistente);
       return postExistente !== post;
     });
-    const valorName = prompt("Digite um novo nome para este post");
     const valorText = prompt("Digite um novo texto para este post");
 
-    console.log(valorName, valorText);
-
-    if (valorName !== null && valorText !== null) {
+    if (valorText !== null) {
       setContent([
         {
           id: id,
           post: valorText,
           imagem: post.imagem,
-          nome: valorName,
+          nome: post.nome,
           email: user.email,
         },
         ...arrayDpsDaRemocao,
@@ -122,7 +119,7 @@ const PageToUsers = () => {
           id: id,
           post: valorText,
           imagem: post.imagem,
-          nome: valorName,
+          nome: post.nome,
           email: user.email,
         },
         ...arrayDpsDaRemocao,
