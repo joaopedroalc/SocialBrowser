@@ -99,7 +99,7 @@ const PageToUsers = () => {
 
     const valorText = prompt("Digite um novo texto para este post");
 
-    if (valorText !== null) {
+    if (valorText !== null && valorText !== "") {
       setContent([
         {
           id: post.id,
