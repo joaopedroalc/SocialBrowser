@@ -51,7 +51,13 @@ export default function FormDialog({ item }) {
   }
 
   const handleClickOpen = () => {
-    setOpen(true);
+    if (
+      confirm(
+        "Tem certeza disso ? se você confirmar você deverá colocar outro texto para esse post"
+      )
+    ) {
+      setOpen(true);
+    }
   };
 
   const handleClose = () => {
