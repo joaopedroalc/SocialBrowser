@@ -5,6 +5,7 @@ import styles from "./Post.module.css";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import ThumbDownIcon from "@mui/icons-material/ThumbDown";
 import { Images } from "./Images";
+import FormDialog from "./FormDialog";
 
 export default function Post({ deletarPost, editarPost, curtirPost }) {
   const { user, content } = useContext(PostsContext);
@@ -30,13 +31,7 @@ export default function Post({ deletarPost, editarPost, curtirPost }) {
                   >
                     Deletar
                   </Button>
-                  <Button
-                    variant='outlined'
-                    color='info'
-                    onClick={() => editarPost(item)}
-                  >
-                    Editar
-                  </Button>
+                  <FormDialog item={item} />
                 </div>
               ) : (
                 <>
