@@ -84,7 +84,6 @@ export default function FormDialog({ item }) {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
           <Button onClick={handleClose}>Editar</Button>
         </DialogActions>
       </Dialog>
