@@ -147,6 +147,8 @@ const PageToUsers = () => {
     });
 
     setContent(dados);
+    const db = getDatabase();
+    set(ref(db, "posts/"), dados);
   }
 
   function handleCaptureValuePost() {
