@@ -62,6 +62,7 @@ export default function FormDialog({ item }) {
 
   const handleClose = () => {
     setOpen(false);
+    setPost("");
   };
 
   return (
